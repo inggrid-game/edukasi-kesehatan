@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kebersihan Tangan: Misi Perawat Pencegah Infeksi</title>
+<style>
+*{box-sizing:border-box;margin:0}
+body{background:#073a3b;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:Verdana,Arial,sans-serif}
+#st{width:1280px;height:720px;flex:none;background:#f3faf9;color:#10302f;padding:36px 56px;display:flex;flex-direction:column}
+h1{font-size:44px;line-height:1.2;color:#0a5c5d}h2{font-size:30px;color:#0a5c5d;margin-bottom:12px}
+p,li{font-size:22px;line-height:1.45}li{margin:6px 0 6px 28px}
+.b{font:700 22px Verdana,Arial,sans-serif;border:3px solid #0a6a6b;border-radius:12px;padding:12px 26px;min-height:56px;background:#0a6a6b;color:#fff;cursor:pointer}
+.b:hover{background:#074f50}.b.s{background:#fff;color:#0a5c5d}.b.s:hover{background:#dff1ef}.b.x{opacity:.45;cursor:not-allowed}
+.o{text-align:left;font-weight:600;border-color:#8fc4c2}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.hd{display:flex;justify-content:space-between;font-size:21px;font-weight:700;color:#0a5c5d;margin-bottom:12px}
+.fb{margin-top:12px;padding:12px 18px;border-radius:12px;font-size:21px;font-weight:600}
+.ok{background:#d6f2dc;color:#14532d}.no{background:#fde0e0;color:#7f1d1d}
+.row{display:flex;gap:18px}.card{flex:1;background:#fff;border:3px solid #8fc4c2;border-radius:16px;padding:20px 24px}
+.nav{margin-top:auto;display:flex;justify-content:space-between;gap:12px}
+.chip{display:inline-block;background:#d6f2dc;color:#14532d;border-radius:10px;padding:6px 12px;margin:0 8px 8px 0;font-size:18px;font-weight:600}
+</style></head><body><div id="st"></div>
+<script>
+const S=document.getElementById('st'),sc=[0,0,0],dn=[0,0,0];
+let V='cover',m=0,lv=3,i=0,k=0,fb='',ans=0,sel=-1,ord=[],ac;
+const M=["Kapan Harus Cuci Tangan?","Urutkan Langkah Cuci Tangan","Pilih APD yang Tepat"];
+const APD=["😷 Masker medis","🧤 Sarung tangan","🥽 Pelindung wajah","🗑️ Kotak limbah tajam","👟 Sepatu kain biasa"];
+const T=[[
+{q:"Kamu akan mengukur tekanan darah pasien. Apa yang dilakukan lebih dulu?",o:["Langsung memasang manset","Cuci tangan dulu","Menyemprot parfum ke tangan"],a:1,f:"Cuci tangan SEBELUM menyentuh pasien melindungi pasien dari kuman di tanganmu."},
+{q:"Tanganmu terkena percikan darah pasien. Apa langkah yang tepat?",o:["Lanjut bekerja, nanti saja","Mengelap dengan kain pasien","Segera cuci tangan"],a:2,f:"Setelah terpapar cairan tubuh, cuci tangan segera agar kuman tidak menyebar."},
+{q:"Sebelum memasang infus (tindakan aseptik), apa yang wajib dilakukan?",o:["Cuci tangan, lalu pakai sarung tangan bersih","Pakai sarung tangan saja","Sentuh area suntikan dulu"],a:0,f:"Tangan harus bersih sebelum tindakan agar kuman tidak masuk ke tubuh pasien."},
+{q:"Kamu baru memegang pagar tempat tidur pasien lalu akan ke pasien lain. Apa yang dilakukan?",o:["Usap tangan ke baju","Pindah saja, tidak menyentuh pasien","Cuci tangan dulu"],a:2,f:"Lingkungan sekitar pasien juga membawa kuman. Cuci tangan setelah menyentuhnya."}],null,[
+{q:"Pasien batuk dan diduga menular. Apa yang kamu pakai?",o:APD,a:0,f:"Masker medis menahan percikan batuk."},
+{q:"Kamu mengambil sampel darah. Pelindung utama untuk tanganmu?",o:APD,a:1,f:"Sarung tangan melindungi dari kontak langsung dengan darah."},
+{q:"Saat penyedotan lendir, cairan bisa memercik ke wajah. Apa yang dipakai?",o:APD,a:2,f:"Pelindung wajah menahan percikan ke mata, hidung, dan mulut."},
+{q:"Kamu selesai menyuntik dan memegang jarum bekas. Ke mana dibuang?",o:APD,a:3,f:"Jarum bekas langsung masuk kotak limbah tajam, tanpa ditutup ulang."}]];
+const ST=["Basahi tangan dengan air mengalir","Tuang sabun secukupnya","Gosok kedua telapak tangan","Gosok punggung tangan dan sela jari","Gosok ujung jari dan ibu jari","Bilas, lalu keringkan dengan tisu"];
+const tot=()=>sc[0]+sc[1]+sc[2],all=()=>dn[0]&&dn[1]&&dn[2];
+function bp(g){try{ac=ac||new(window.AudioContext||webkitAudioContext)();const o=ac.createOscillator(),n=ac.createGain();o.frequency.value=g?880:200;n.gain.value=.1;o.connect(n);n.connect(ac.destination);o.start();o.stop(ac.currentTime+.18)}catch(e){}}
+function fit(){S.style.transform='scale('+Math.min(innerWidth/1280,innerHeight/720)+')'}
+addEventListener('resize',fit);fit();
+function go(v){V=v;render()}
+function start(j){m=j;lv=3;i=0;k=0;fb='';ans=0;sel=-1;sc[j]=0;ord=[0,1,2,3,4,5].sort(()=>Math.random()-.5);go('play')}
+function nav(a,b){return '<div class="nav">'+a+b+'</div>'}
+function B(t,f,c,x){return '<button class="b '+(c||'')+(x?' x':'')+'" '+(x?'':'onclick="'+f+'"')+'>'+t+'</button>'}
+function pick(j){if(ans)return;ans=1;sel=j;const q=T[m][i];if(j==q.a){sc[m]+=25;bp(1);fb='<div class="fb ok">✅ Benar! +25. '+q.f+'</div>'}else{lv--;bp(0);fb='<div class="fb no">❌ Kurang tepat (nyawa −1). '+q.f+'</div>'}render()}
+function nxt(){if(lv<=0)return go('over');if(i<3){i++;ans=0;sel=-1;fb='';render()}else fin()}
+function pick2(x){if(x==k){sc[m]+=k==5?20:16;k++;bp(1);fb='<div class="fb ok">✅ Benar! Langkah '+k+' selesai.</div>';if(k==6)return fin()}else{lv--;bp(0);fb='<div class="fb no">❌ Belum tepat (nyawa −1). Ingat urutan dari membasahi tangan sampai mengeringkan.</div>';if(lv<=0)return go('over')}render()}
+function fin(){dn[m]=1;go('done')}
+function reset(){sc.fill(0);dn.fill(0);go('menu')}
+function render(){let h='';
+if(V=='cover')h='<div style="margin:auto;text-align:center"><div style="font-size:84px">🧼🩺</div><h1>Kebersihan Tangan:<br>Misi Perawat Pencegah Infeksi</h1><p style="margin:16px 0 28px">Tahukah kamu, tangan yang tampak bersih bisa membawa jutaan kuman?</p>'+B('▶ Mulai','go(\'guide\')')+'</div>';
+if(V=='guide')h='<h2>Panduan Bermain</h2><div class="row"><div class="card"><p><b>Tujuan belajar</b></p><ul><li>Menentukan waktu yang tepat untuk cuci tangan</li><li>Mengurutkan langkah cuci tangan</li><li>Memilih APD sesuai situasi</li></ul></div><div class="card"><p><b>Aturan</b></p><ul><li>3 misi, tiap misi punya 3 nyawa ❤️</li><li>Jawaban benar menambah skor (maks. 100 per misi)</li><li>Misi berikutnya terbuka setelah misi sebelumnya selesai</li><li>Nyawa habis? Ulangi misi tanpa kehilangan misi lain</li></ul></div></div>'+nav(B('◀ Kembali',"go('cover')",'s'),B('Menu Misi ▶',"go('menu')"));
+if(V=='menu')h='<h2>Menu Misi</h2><div class="row">'+[0,1,2].map(j=>{const o=j==0||dn[j-1];return '<div class="card"><p><b>Misi '+(j+1)+'</b></p><p style="margin:8px 0">'+['🧼','🔢','😷'][j]+' '+M[j]+'</p><p style="margin-bottom:14px">'+(dn[j]?'✅ Skor '+sc[j]+'/100':o?'Belum dimainkan':'🔒 Selesaikan misi sebelumnya')+'</p>'+B(dn[j]?'Main lagi':'Mulai','start('+j+')','',!o)+'</div>'}).join('')+'</div><p style="margin-top:18px">Skor total: <b>'+tot()+'/300</b></p>'+nav(B('◀ Panduan',"go('guide')",'s'),B('Hasil Akhir ▶',"go('res')",'',!all()));
+if(V=='play'){h='<div class="hd"><span>Misi '+(m+1)+'/3 — '+M[m]+'</span><span>'+'❤️'.repeat(lv)+'🖤'.repeat(3-lv)+' &nbsp; Skor: '+tot()+'</span></div>';
+ if(m==1){h+='<h2>Langkah '+(k+1)+' dari 6: pilih langkah berikutnya</h2><div>'+ST.slice(0,k).map((s,j)=>'<span class="chip">'+(j+1)+'. '+s+'</span>').join('')+'</div><div class="g">'+ord.filter(x=>x>=k).map(x=>'<button class="b s o" onclick="pick2('+x+')">'+ST[x]+'</button>').join('')+'</div>'+fb}
+ else{const q=T[m][i];h+='<h2>Soal '+(i+1)+' dari 4</h2><p style="margin-bottom:6px">'+q.q+'</p><div class="g">'+q.o.map((t,j)=>'<button class="b s o" onclick="pick('+j+')" style="'+(ans&&j==q.a?'background:#d6f2dc':ans&&j==sel?'background:#fde0e0':'')+'">'+t+'</button>').join('')+'</div>'+fb+(ans?'<div style="margin-top:12px;text-align:right">'+B('Lanjut ▶','nxt()')+'</div>':'')}
+ h+=nav(B('◀ Menu',"go('menu')",'s'),'<span></span>')}
+if(V=='done')h='<div style="margin:auto;text-align:center"><div style="font-size:72px">🎉</div><h1>Misi '+(m+1)+' selesai!</h1><p style="margin:14px 0 26px">Skor misi ini: <b>'+sc[m]+'/100</b> &nbsp;|&nbsp; Skor total: <b>'+tot()+'/300</b></p>'+B('Menu Misi',"go('menu')",'s')+' '+(m<2?B('Misi berikutnya ▶','start('+(m+1)+')'):B('Lihat Hasil Akhir ▶',"go('res')"))+'</div>';
+if(V=='over')h='<div style="margin:auto;text-align:center"><div style="font-size:72px">🩹</div><h1>Nyawa habis</h1><p style="margin:14px 0 26px">Tidak apa-apa. Pelajari lagi lalu coba ulang misi ini.</p>'+B('Menu Misi',"go('menu')",'s')+' '+B('Ulangi Misi','start('+m+')')+'</div>';
+if(V=='res'){const t=tot(),s=t>=270?'⭐⭐⭐':t>=200?'⭐⭐':'⭐';h='<div style="margin:auto;text-align:center"><div style="font-size:64px">'+s+'</div><h1>Hasil Akhir: '+t+'/300</h1><p style="margin:12px 0">'+(t>=270?'Luar biasa! Kamu siap menjaga keselamatan pasien.':t>=200?'Bagus! Ulangi misi yang masih kurang untuk mencapai skor penuh.':'Ayo pelajari lagi dan ulangi misi untuk memperbaiki skor.')+'</p><p style="margin:12px 80px 24px;background:#fff;border:3px solid #8fc4c2;border-radius:14px;padding:14px">💭 <b>Refleksi:</b> Di tempat praktikmu nanti, kapan kamu paling mudah lupa cuci tangan? Apa solusimu?</p>'+B('Menu Misi',"go('menu')",'s')+' '+B('Main dari awal','reset()','s')+' '+B('Info Kreator ▶',"go('cred')")+'</div>'}
+if(V=='cred')h='<div style="margin:auto;text-align:center"><h2>Informasi Kreator</h2><p><b>Kreator:</b> [Isi nama kreator dan organisasi]</p><p style="margin-top:14px">Bidang keahlian: Kesehatan dan Pekerjaan Sosial</p><p style="margin-top:14px">Seluruh ilustrasi memakai emoji sistem, tanpa aset gambar atau suara eksternal. Efek suara dibuat oleh peramban.</p><p style="margin-top:24px">'+B('◀ Hasil Akhir',"go('res')",'s')+'</p></div>';
+S.innerHTML=h}
+render();
+</script></body></html>
